@@ -11,6 +11,7 @@ data class ApiBike(
     val name: String,
     val price: Double,
     val imgSrc: String,
+    val description: String,
 )
 
 // extension function for an ApiTask List to convert is to a Domain Task List
@@ -22,7 +23,7 @@ fun Flow<List<ApiBike>>.asDomainObjects(): Flow<List<Bike>> {
 
 fun List<ApiBike>.asDomainObjects(): List<Bike> {
     var domainList = this.map {
-        Bike(it.id, it.name, it.price, it.imgSrc)
+        Bike(it.id, it.name, it.price, it.imgSrc, it.description)
     }
     return domainList
 }

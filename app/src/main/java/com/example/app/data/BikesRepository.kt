@@ -29,7 +29,7 @@ interface BikesRepository {
     fun getBikes(): Flow<List<Bike>>
 
     // one specific item
-    fun getBike(id: String): Flow<Bike?>
+    fun getBike(name: String): Flow<Bike?>
 
     suspend fun insertBike(bike: Bike)
 

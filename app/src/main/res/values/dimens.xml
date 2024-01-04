@@ -10,4 +10,5 @@
     <dimen name="drawer_padding_content">8dp</dimen>
     <dimen name="drawer_padding_header">8dp</dimen>
     <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
 </resources>

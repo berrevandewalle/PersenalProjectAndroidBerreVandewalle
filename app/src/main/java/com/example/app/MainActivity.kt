@@ -14,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.app.data.BikeSampler
 import com.example.app.data.database.BikeDao
 import com.example.app.data.database.BikeDb
+import com.example.app.data.database.ClothesDao
+import com.example.app.data.database.ClothesDb
 import com.example.app.data.database.dbBike
 import com.example.app.ui.BikeApp
 import com.example.app.ui.theme.BikeAppTheme
@@ -24,7 +26,9 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var bikeDb: BikeDb
+    private lateinit var clothesDb: ClothesDb
     lateinit var dao: BikeDao
+    //lateinit var dao: ClothesDao
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +38,18 @@ class MainActivity : ComponentActivity() {
         dexOutputDir.setReadOnly()*/
         Log.i("vm inspection", "Main activity onCreate")
 
-        /*bikeDb = BikeDb.getDatabase(context = applicationContext)
+        bikeDb = BikeDb.getDatabase(context = applicationContext)
         dao = bikeDb.bikeDao()
 
         GlobalScope.launch(Dispatchers.IO) {
             // Databasebewerkingen uitvoeren op een achtergrondthread
             val bikes = BikeSampler.getAll()
             for (bike in bikes) {
-                dao.insert(dbBike(bike.id, bike.name, bike.price, bike.imgSrc))
+                dao.insert(dbBike(bike.id, bike.name, bike.price, bike.imgSrc, bike.description))
             }
-        }*/
+        }
+
+
 
         setContent {
             BikeAppTheme {

@@ -15,4 +15,7 @@ data class Bike(
 
     @SerializedName("img_src")
     val imgSrc: String,
+
+    @SerializedName("description")
+    val description: String,
 )

@@ -13,8 +13,8 @@ data class Clothes (
         @SerializedName("price")
         var price: Double,
 
-        @SerializedName("img_src")
-        val despcription: String,
+        @SerializedName("description")
+        val description: String,
 
         @SerializedName("img_src")
         val imgSrc: String,

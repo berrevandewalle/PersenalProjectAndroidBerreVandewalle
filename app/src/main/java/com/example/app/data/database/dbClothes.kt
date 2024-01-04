@@ -36,7 +36,7 @@ fun Clothes.asDbClothes(): dbClothes {
         id = this.id,
         name = this.name,
         price = this.price,
-        description = this.despcription,
+        description = this.description,
         imgSrc = this.imgSrc
     )
 }

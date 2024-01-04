@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.app.data.BikeSampler
 
-@Database(entities = [dbBike::class], version = 2, exportSchema = false)
+@Database(entities = [dbBike::class], version = 3, exportSchema = false)
 abstract class BikeDb : RoomDatabase() {
 
     abstract fun bikeDao(): BikeDao
@@ -29,7 +29,7 @@ abstract class BikeDb : RoomDatabase() {
             val bikeDao = database.bikeDao()
             val bikes = BikeSampler.getAll()
             for (bike in bikes) {
-                bikeDao.insert(dbBike(bike.id, bike.name, bike.price, bike.imgSrc))
+                bikeDao.insert(dbBike(bike.id, bike.name, bike.price, bike.imgSrc, bike.description))
             }
         }
     }

@@ -1,13 +1,13 @@
 package com.example.app.ui.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.app.ui.bikeOverview.BikeOverview
-import com.example.app.ui.bikeOverview. BikeOverview
-import com.example.app.ui.clothesOverview.ClothesOverview
+import com.example.app.ui.detail.DetailBikeScreen
 
 
 @Composable
@@ -23,7 +23,14 @@ fun navComponent(
         modifier = modifier,
     ) {
         composable(route = BikeOverviewScreen.Start.name) {
-            BikeOverview(isAddingVisisble = fabActionVisible, makeInvisible = fabResetAction)
+            BikeOverview(isAddingVisisble = fabActionVisible, makeInvisible = fabResetAction,
+                navController = navController)
+        }
+        composable(route = "detailBike/{name}") { backStackEntry ->
+            backStackEntry.arguments?.getString("name")?.let { name ->
+                Log.d("Navigation", "Received name: $name")
+                DetailBikeScreen(name = name, navController= navController)
+            }
         }
 /*        composable(route = ClothesOverviewScreen.Start.name) {
             ClothesOverview(isAddingVisisble = fabActionVisible, makeInvisible = fabResetAction)

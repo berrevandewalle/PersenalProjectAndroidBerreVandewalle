@@ -15,14 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.app.model.Bike
 import com.example.app.model.Clothes
-import com.example.app.ui.bikeOverview.BikeApiState
-import com.example.app.ui.bikeOverview.BikeListState
-import com.example.app.ui.bikeOverview.BikeOverviewState
-import com.example.app.ui.bikeOverview.BikeOverviewViewModel
-import com.example.app.ui.components.bike.BikeItem
-import com.example.app.ui.components.bike.CreateBike
 import com.example.app.ui.components.clothes.ClothesItem
 import com.example.app.ui.components.clothes.CreateClothes
 import kotlinx.coroutines.launch
@@ -87,7 +80,7 @@ fun ClothesListComponent(modifier: Modifier = Modifier, clothesOverviewState: Cl
     val lazyListState = rememberLazyListState()
     LazyColumn(state = lazyListState) {
         items(clothesListState.clothesList) {
-            ClothesItem(name = it.name, price = it.price, description = it.despcription, img = it.imgSrc)
+            ClothesItem(name = it.name, price = it.price, description = it.description, img = it.imgSrc)
         }
     }
     val coroutineScope = rememberCoroutineScope()

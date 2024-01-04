@@ -11,6 +11,7 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for ItemEditViewModel
         // Initializer for HomeViewModel
+        val bikesRepository =
         initializer {
             BikeOverviewViewModel(inventoryApplication().container.bikesRepository)
         }

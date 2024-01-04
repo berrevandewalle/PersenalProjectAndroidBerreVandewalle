@@ -3,6 +3,7 @@ package com.example.app.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material3.BottomAppBar
@@ -19,7 +20,7 @@ fun BikeBottomAppBar(goHome: () -> Unit) {
         contentColor = MaterialTheme.colorScheme.primary,
         actions = {
             IconButton(onClick = goHome) {
-                Icon(Icons.Filled.Check, contentDescription = "navigate to home screen")
+                Icon(Icons.Filled.Home, contentDescription = "navigate to home screen")
             }
 
 /*            IconButton(onClick = goToDetail) {

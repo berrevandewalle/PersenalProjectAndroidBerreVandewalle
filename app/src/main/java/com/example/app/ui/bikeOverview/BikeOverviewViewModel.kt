@@ -31,7 +31,7 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
     * Note: uiState is a cold flow. Changes don't come in from above unless a
     * refresh is called...
     * */
-    private val _uiState = MutableStateFlow(BikeOverviewState(BikeSampler.getAll()))
+    private val _uiState = MutableStateFlow(BikeOverviewState(/*BikeSampler.getAll()*/))
     val uiState: StateFlow<BikeOverviewState> = _uiState.asStateFlow()
 
     lateinit var uiListState: StateFlow<BikeListState>
@@ -49,7 +49,8 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
 
     fun addBike() {
         // saving the new bike (to db? to network? --> doesn't matter)
-        viewModelScope.launch { saveBike(Bike(_uiState.value.newBikeId, _uiState.value.newBikeName, _uiState.value.newBikePrice, _uiState.value.newBikeImgSrc)) }
+        viewModelScope.launch { saveBike(Bike(_uiState.value.newBikeId, _uiState.value.newBikeName, _uiState.value.newBikePrice, _uiState.value.newBikeImgSrc,
+            _uiState.value.newBikeDescription)) }
 
         // reset the input fields
         _uiState.update {
@@ -62,6 +63,7 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
                 newBikeName = "",
                 newBikePrice = 0.0,
                 newBikeImgSrc = "",
+                newBikeDescription = "",
                 // whenever this changes, scrollToItemIndex should be scrolled into view
                 scrollActionIdx = currentState.scrollActionIdx.plus(1),
                 scrollToItemIndex = uiListState.value.bikeList.size,
@@ -102,6 +104,12 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
         }
     }
 
+    fun setNewBikeDescription(newBikeDescription: String) {
+        _uiState.update {
+            it.copy(newBikeDescription = newBikeDescription)
+        }
+    }
+
     private fun getRepoBikes() {
         try {
             viewModelScope.launch { bikesRepository.refresh() }
@@ -119,7 +127,6 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
                 started = SharingStarted.WhileSubscribed(5_000L),
                 initialValue = WorkerState(),
             )
-            Log.i("homo", "homo")
         } catch (e: IOException) {
             // show a toast? save a log on firebase? ...
             // set the error state

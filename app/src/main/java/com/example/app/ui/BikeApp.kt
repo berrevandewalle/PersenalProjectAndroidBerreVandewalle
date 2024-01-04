@@ -2,10 +2,8 @@ package com.example.app.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -15,33 +13,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.app.R
-import com.example.app.model.Bike
 import com.example.app.ui.components.BikeAppAppBar
 import com.example.app.ui.components.BikeBottomAppBar
-import com.example.app.ui.components.bike.BikeItem
 import com.example.app.ui.components.BikeNavigationRail
 import com.example.app.ui.components.NavigationDrawerContent
 import com.example.app.ui.navigation.BikeOverviewScreen
 import com.example.app.ui.navigation.navComponent
 import com.example.app.ui.util.BikeNavigationType
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
@@ -80,9 +71,15 @@ fun BikeApp(
         )
     }
 
-    val currentScreenTitle = BikeOverviewScreen.valueOf(
-        backStackEntry?.destination?.route ?: BikeOverviewScreen.Start.name,
-    ).title
+    val goBack: () -> Unit = {
+        navController.popBackStack(
+            BikeOverviewScreen.Start.name,
+            inclusive = false,
+        )
+    }
+    val currentScreenTitle = BikeOverviewScreen.values().find {
+        it.name == backStackEntry?.destination?.route
+    }?.title ?: BikeOverviewScreen.Start.title
 
     var isAddNewVisible by remember { mutableStateOf(false) }
 
@@ -105,6 +102,7 @@ fun BikeApp(
                 topBar = {
                     BikeAppAppBar(
                         currentScreenTitle = currentScreenTitle,
+                        goBack = goBack
                     )
                 },
                 // modifier = Modifier.padding(dimensionResource(id = R.dimen.drawer_width), 0.dp, 0.dp, 0.dp )
@@ -128,6 +126,7 @@ fun BikeApp(
             topBar = {
                 BikeAppAppBar(
                     currentScreenTitle = currentScreenTitle,
+                    goBack = goBack
                 )
             },
             bottomBar = {
@@ -157,6 +156,7 @@ fun BikeApp(
                 topBar = {
                     BikeAppAppBar(
                         currentScreenTitle = currentScreenTitle,
+                        goBack = goBack
                     )
                 },
                 floatingActionButton = {
@@ -181,6 +181,7 @@ fun BikeApp(
 }
 
 
+/*
 @Composable
 private fun BikeBody(
     modifier: Modifier = Modifier, bikeOverviewState: BikeOverviewState, bikeListState: BikeListState
@@ -188,7 +189,9 @@ private fun BikeBody(
     val lazyListState = rememberLazyListState()
     LazyColumn(state = lazyListState) {
         items(bikeListState.bikeList) {
-            BikeItem(name = it.name, price = it.price, img = it.imgSrc)
+            BikeItem(
+                name = it.name, price = it.price, img = it.imgSrc
+            )
         }
     }
     val coroutineScope = rememberCoroutineScope()
@@ -200,23 +203,25 @@ private fun BikeBody(
             }
         }
     }
-}
-
+}*/
+/*
 @Composable
 private fun BikeList(
     bikeList: List<Bike>, modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
         items(items = bikeList, key = { it.id }) { bike ->
-            BikeItem(name = bike.name, price = bike.price, img = bike.imgSrc,
+            BikeItem(
+                name = bike.name, price = bike.price, img = bike.imgSrc,
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_small)))
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+            )
 //                    .clickable { onBikeClick(bike) })
         }
     }
 }
 
-/*@Preview(widthDp = 500)
+@Preview(widthDp = 500)
 @Composable
 fun BikeAppPreview() {
     BikeAppTheme {

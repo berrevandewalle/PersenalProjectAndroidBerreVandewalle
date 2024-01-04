@@ -29,9 +29,11 @@ fun CreateBike(
     bikeName: String,
     bikePrice: Double,
     bikeImgSrc: String,
+    bikeDecription: String,
     onBikeNameChanged: (String) -> Unit,
     onBikePriceChanged: (Double) -> Unit,
     onBikeImgSrcChanged: (String) -> Unit,
+    onBikeDescriptionChanged: (String) -> Unit,
     onBikeSaved: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
@@ -69,6 +71,12 @@ fun CreateBike(
                     label = { Text("bike img src") },
                 )
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.mediumSpacer)))
+                OutlinedTextField(
+                    value = bikeDecription,
+                    onValueChange = onBikeDescriptionChanged,
+                    label = { Text("bike description") },
+                )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.smallSpacer)))
                 Row {
                     Spacer(Modifier.weight(1F))
                     TextButton(onClick = onDismissRequest) {
@@ -88,6 +96,6 @@ fun CreateBike(
 @Composable
 fun CreateTaskPreview() {
     BikeAppTheme {
-        CreateBike("todo", 0.0,"src", {}, {}, {},{}, { /* on dismiss */ })
+        CreateBike("todo", 0.0,"src", "", {}, {}, {},{},{}, { /* on dismiss */ })
     }
 }
