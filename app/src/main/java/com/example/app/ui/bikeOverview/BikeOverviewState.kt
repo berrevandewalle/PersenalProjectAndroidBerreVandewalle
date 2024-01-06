@@ -6,7 +6,7 @@ import com.example.app.model.Bike
 data class BikeOverviewState(
    // val currentBikeList: List<Bike>,
     //val isAddingVisible: boolean = false,
-    val newBikeId: Int = 0,
+    val newBikeId: Int = 10,
     val newBikeName: String = "",
     val newBikePrice: Double = 0.0,
     val newBikeImgSrc: String = "",

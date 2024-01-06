@@ -1,5 +1,6 @@
 package com.example.app.ui
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -41,6 +42,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app.ui.bikeOverview.BikeListState
 import com.example.app.ui.bikeOverview.BikeOverviewState
@@ -105,19 +107,10 @@ fun BikeApp(
                         goBack = goBack
                     )
                 },
-                // modifier = Modifier.padding(dimensionResource(id = R.dimen.drawer_width), 0.dp, 0.dp, 0.dp )
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.drawer_width), 0.dp, 0.dp, 0.dp )
             ) { innerPadding ->
                 navComponent(navController, modifier = Modifier.padding(innerPadding))
-            }/*{ innerPadding ->
-
-                BikeBody(
-                    modifier = modifier
-                        .padding(innerPadding)
-                        .fillMaxSize(),
-                    bikeOverviewState = bikeOverviewState,
-                    bikeListState = bikeUiList,
-                )
-            }*/
+            }
         }
 
         }else if (navigationType == BikeNavigationType.BOTTOM_NAVIGATION) {
@@ -136,11 +129,17 @@ fun BikeApp(
             },
             floatingActionButton = {
                 FloatingActionButton(onClick = { isAddNewVisible = !isAddNewVisible }) {
-                    Icon(Icons.Default.Add, contentDescription = "Clothes")
+                    Log.d("add2", isAddNewVisible.toString())
+                    Icon(Icons.Default.Add, contentDescription = "Add")
                 }
             },
         ) { innerPadding ->
-            navComponent(navController, modifier = Modifier.padding(innerPadding))
+            navComponent(
+                navController,
+                modifier = Modifier.padding(innerPadding),
+                fabActionVisible = isAddNewVisible,
+                fabResetAction = { isAddNewVisible = false }
+            )
         }
     }else {
         Row {
@@ -161,66 +160,24 @@ fun BikeApp(
                 },
                 floatingActionButton = {
                     FloatingActionButton(onClick = { isAddNewVisible = !isAddNewVisible }) {
-                        Icon(Icons.Default.Add, contentDescription = "Clothes")
+                        Log.d("add2", isAddNewVisible.toString())
+                        Icon(Icons.Default.Add, contentDescription = "Add")
                     }
                 },
             ) { innerPadding ->
-                navComponent(navController, modifier = Modifier.padding(innerPadding))
-            }/*{ innerPadding ->
-
-                BikeBody(
-                    modifier = modifier
-                        .padding(innerPadding)
-                        .fillMaxSize(),
-                    bikeOverviewState = bikeOverviewState,
-                    bikeListState = bikeUiList,
+                navComponent(
+                    navController,
+                    modifier = Modifier.padding(innerPadding),
+                    fabActionVisible = isAddNewVisible,
+                    fabResetAction = { isAddNewVisible = false }
                 )
-            }*/
-        }
-    }
-}
-
-
-/*
-@Composable
-private fun BikeBody(
-    modifier: Modifier = Modifier, bikeOverviewState: BikeOverviewState, bikeListState: BikeListState
-) {
-    val lazyListState = rememberLazyListState()
-    LazyColumn(state = lazyListState) {
-        items(bikeListState.bikeList) {
-            BikeItem(
-                name = it.name, price = it.price, img = it.imgSrc
-            )
-        }
-    }
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(bikeOverviewState.scrollActionIdx) {
-        if (bikeOverviewState.scrollActionIdx != 0) {
-            coroutineScope.launch {
-                lazyListState.animateScrollToItem(bikeOverviewState.scrollToItemIndex)
             }
         }
     }
-}*/
-/*
-@Composable
-private fun BikeList(
-    bikeList: List<Bike>, modifier: Modifier = Modifier
-) {
-    LazyColumn(modifier = modifier) {
-        items(items = bikeList, key = { it.id }) { bike ->
-            BikeItem(
-                name = bike.name, price = bike.price, img = bike.imgSrc,
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_small))
-            )
-//                    .clickable { onBikeClick(bike) })
-        }
-    }
 }
 
+
+/*
 @Preview(widthDp = 500)
 @Composable
 fun BikeAppPreview() {

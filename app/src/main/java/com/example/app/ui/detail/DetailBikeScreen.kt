@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,17 +26,20 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.app.R
 import com.example.app.model.Bike
-import com.example.app.ui.components.BikeAppAppBar
+import com.example.app.ui.navigation.BikeOverviewScreen
 import kotlinx.coroutines.flow.firstOrNull
 import java.text.NumberFormat
 import kotlinx.coroutines.runBlocking
-
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.GlobalScope
 
 @SuppressLint("FlowOperatorInvokedInComposition")
 @Composable
@@ -122,6 +128,21 @@ fun DetailBikeScreen(
             }
 
         }
+    }
+    Button(
+        onClick =  {
+            viewModel.viewModelScope.launch {
+                Log.d("delete", "delete bike")
+                viewModel.deleteBike(detailBike)
+                navController.popBackStack(
+                    BikeOverviewScreen.Start.name,
+                    inclusive = false,
+                )
+             }
+        },
+        modifier = modifier,
+    ) {
+        Text(text = "delete", fontSize = 20.sp)
     }
 
 }

@@ -22,13 +22,13 @@ data class dbBike(
 
 )
 
-fun dbBike.asDomainBike(): Bike {
+fun dbBike?.asDomainBike(): Bike {
     return Bike(
-        this.id,
-        this.name,
-        this.price,
-        this.imgSrc,
-        this.description
+        id = this?.id ?: 0,
+        name = this?.name.orEmpty(),
+        price = this?.price ?: 0.0,
+        imgSrc = this?.imgSrc.orEmpty(),
+        description = this?.description.orEmpty()
     )
 }
 

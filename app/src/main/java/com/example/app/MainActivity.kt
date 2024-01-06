@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         val dexOutputDir: File = codeCacheDir
         dexOutputDir.setReadOnly()*/
         Log.i("vm inspection", "Main activity onCreate")
-
+/*
         bikeDb = BikeDb.getDatabase(context = applicationContext)
         dao = bikeDb.bikeDao()
 
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-
+*/
 
         setContent {
             BikeAppTheme {

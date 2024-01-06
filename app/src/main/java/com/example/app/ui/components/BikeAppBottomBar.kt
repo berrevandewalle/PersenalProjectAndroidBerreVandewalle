@@ -23,6 +23,7 @@ fun BikeBottomAppBar(goHome: () -> Unit) {
                 Icon(Icons.Filled.Home, contentDescription = "navigate to home screen")
             }
 
+
 /*            IconButton(onClick = goToDetail) {
                 Icon(
                     Icons.Filled.ManageAccounts,

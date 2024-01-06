@@ -77,6 +77,7 @@ class CachingBikesRepository(private val bikeDao: BikeDao, private val bikeApiSe
     }
 
     override suspend fun deleteBike(bike: Bike) {
+        Log.d("delete", "delete bike in bikeRepository")
         bikeDao.delete(bike.asDbBike())
     }
 

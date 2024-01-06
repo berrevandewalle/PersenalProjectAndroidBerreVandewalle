@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 fun BikeOverview(
     modifier: Modifier = Modifier,
     bikeOverviewViewModel: BikeOverviewViewModel = viewModel(factory = BikeOverviewViewModel.Factory),
-    isAddingVisisble: Boolean = false,
+    isAddingVisisble: Boolean,
     makeInvisible: () -> Unit = {},
     navController: NavHostController
 ){
@@ -42,13 +42,7 @@ fun BikeOverview(
     // use the ApiState
     val bikeApiState = bikeOverviewViewModel.bikeApiState
 
-    //use the workerstate
-    val workerState by bikeOverviewViewModel.wifiWorkerState.collectAsState()
     Column {
-        /*when(workerState.workerInfo?.state){
-            null -> Text("state unknown")
-            else -> Text(workerState.workerInfo?.state!!.name)
-        }*/
 
         Box(modifier = modifier) {
             when (bikeApiState) {
@@ -69,6 +63,7 @@ fun BikeOverview(
                     onBikeImgSrcChanged = { bikeOverviewViewModel.setNewBikeImgSrc(it) },
                     onBikeDescriptionChanged = { bikeOverviewViewModel.setNewBikeDescription(it) },
                     onBikeSaved = {
+                        Log.d("addBike", bikeOverviewState.newBikeName)
                         bikeOverviewViewModel.addBike()
                         makeInvisible()
                     },
@@ -108,12 +103,3 @@ fun BikeListComponent(
     }
 }
 
-/*
-@Preview(showBackground = true, widthDp = 1000)
-@Composable
-fun BikeListComponentPreview() {
-    BikeListComponent(bikeOverviewState = BikeOverviewState(BikeSampler.getAll()), bikeListState = BikeListState(listOf(
-        Bike(0, "previewbike", 0.0, "src")
-    )))
-}
-*/

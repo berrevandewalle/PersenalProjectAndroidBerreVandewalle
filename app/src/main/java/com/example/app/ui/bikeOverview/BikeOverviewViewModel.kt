@@ -13,6 +13,7 @@ import com.example.app.BikeApplication
 import com.example.app.data.BikeSampler
 import com.example.app.data.BikesRepository
 import com.example.app.model.Bike
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +22,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.text.NumberFormat
 import kotlin.math.log
@@ -49,8 +51,13 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
 
     fun addBike() {
         // saving the new bike (to db? to network? --> doesn't matter)
+        Log.d("ViewModel", "Adding bike: ${_uiState.value.newBikeId}, ${_uiState.value.newBikeName}, ${_uiState.value.newBikePrice}, " +
+                "${_uiState.value.newBikeImgSrc}, ${_uiState.value.newBikeDescription}")
+
         viewModelScope.launch { saveBike(Bike(_uiState.value.newBikeId, _uiState.value.newBikeName, _uiState.value.newBikePrice, _uiState.value.newBikeImgSrc,
-            _uiState.value.newBikeDescription)) }
+            _uiState.value.newBikeDescription))
+            Log.d("ViewModel", "Bike added successfully")}
+
 
         // reset the input fields
         _uiState.update {
@@ -77,7 +84,7 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
 
     private fun validateInput(): Boolean {
         return with(_uiState) {
-            value.newBikeId > 0 && value.newBikeName.length > 0 && value.newBikePrice > 0
+            value.newBikeId > 0 && value.newBikeName.isNotEmpty() && value.newBikePrice > 0.0
         }
     }
 
@@ -136,7 +143,13 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
 
     private suspend fun saveBike(bike: Bike) {
         if (validateInput()) {
-            bikesRepository.insertBike(bike)
+            Log.d("addBike", bike.name)
+            withContext(Dispatchers.IO) {
+                // This block will now run on the background thread
+                bikesRepository.insertBike(bike)
+            }
+        }else {
+            Log.d("saveBike", "Validation failed.")
         }
     }
 

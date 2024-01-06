@@ -23,8 +23,11 @@ fun navComponent(
         modifier = modifier,
     ) {
         composable(route = BikeOverviewScreen.Start.name) {
-            BikeOverview(isAddingVisisble = fabActionVisible, makeInvisible = fabResetAction,
-                navController = navController)
+            BikeOverview(
+                isAddingVisisble = fabActionVisible,
+                makeInvisible = fabResetAction,
+                navController = navController,
+            )
         }
         composable(route = "detailBike/{name}") { backStackEntry ->
             backStackEntry.arguments?.getString("name")?.let { name ->
