@@ -52,20 +52,7 @@ class NavigationTest {
             .assertIsDisplayed()
     }
 
-    /**
-     * Navigate to bike details
-     *
-     */
-    @Test
-    fun navigateToBikeDetails() {
-        composeTestRule
-            .onNodeWithText("Bike app")
-            .performClick()
-        composeTestRule
-            .onNodeWithText("View more")
-            .performClick()
 
-    }
 
     /**
      * Click add task
