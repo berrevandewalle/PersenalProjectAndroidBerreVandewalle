@@ -50,19 +50,19 @@ import com.example.app.ui.bikeOverview.BikeOverviewViewModel
 import kotlinx.coroutines.launch
 
 
+/**
+ * Bike app
+ *
+ * @param navigationType
+ * @param navController
+ * @param modifier
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BikeApp(
     navigationType: BikeNavigationType,
     navController: NavHostController = rememberNavController(),
-    modifier: Modifier = Modifier,
-    viewModel: BikeOverviewViewModel = viewModel(factory = BikeOverviewViewModel.Factory)
 ){
-    val bikeOverviewState by viewModel.uiState.collectAsState()
-    val bikeUiList by viewModel.uiListState.collectAsState()
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
-    //val bikeApiService: BikeApiService =
 
     val backStackEntry by navController.currentBackStackEntryAsState()
 

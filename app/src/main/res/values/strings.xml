@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"> Bike app</string>
+    <string name="app_name">Bike app</string>
     <string name="navigation_rail">Navigate between items here</string>
     <string name="back_button">Back</string>
     <string name="expand_button_content_description">Expand task item</string>

@@ -15,13 +15,23 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * Navigation test
+ *
+ * @constructor Create empty Navigation test
+ */
 class NavigationTest {
-    private val someTaskName: String = "some task name"
+    private val someBikeName: String = "some task name"
+    private val someBikePrice: String = 4444.0.toString()
 
     @get:Rule
     val composeTestRule = createComposeRule()
     lateinit var navController: TestNavHostController
 
+    /**
+     * Setup app nav host
+     *
+     */
     @Before
     fun setupAppNavHost() {
         composeTestRule.setContent {
@@ -31,50 +41,69 @@ class NavigationTest {
         }
     }
 
+    /**
+     * Verify start destination
+     *
+     */
     @Test
     fun verifyStartDestination() {
         composeTestRule
-            .onNodeWithText("BikeApp")
+            .onNodeWithText("Bike app")
             .assertIsDisplayed()
     }
 
+    /**
+     * Navigate to bike details
+     *
+     */
     @Test
     fun navigateToBikeDetails() {
         composeTestRule
-            .onNodeWithContentDescription("navigate to detail page")
+            .onNodeWithText("Bike app")
             .performClick()
         composeTestRule
-            .onNodeWithText("Bike description")
-            .assertIsDisplayed()
+            .onNodeWithText("View more")
+            .performClick()
+
     }
 
-    /*
+    /**
+     * Click add task
+     *
+     */
     @Test
     fun clickAddTask() {
         composeTestRule
             .onNodeWithContentDescription("Add")
             .performClick()
         composeTestRule
-            .onNodeWithText("taskname")
+            .onNodeWithText("bike name")
             .assertIsDisplayed()
         composeTestRule
             .onNodeWithText("Save")
             .assertIsDisplayed()
     }
 
+    /**
+     * Can add task
+     *
+     */
     @Test
     fun canAddTask() {
         composeTestRule
             .onNodeWithContentDescription("Add")
             .performClick()
         composeTestRule
-            .onNodeWithText("taskname")
-            .performTextInput(someTaskName)
+            .onNodeWithText("bike name")
+            .performTextInput(someBikeName)
+        composeTestRule
+            .onNodeWithText("price bike")
+            .performTextInput(someBikePrice)
         composeTestRule
             .onNodeWithText("Save")
             .performClick()
         composeTestRule
-            .onNodeWithText(someTaskName)
+            .onNodeWithText(someBikeName)
             .assertIsDisplayed()
-    }*/
+    }
 }

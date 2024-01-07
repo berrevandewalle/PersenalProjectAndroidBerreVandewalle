@@ -2,6 +2,7 @@ package com.example.app.ui.detail
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.End
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -41,6 +45,14 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.GlobalScope
 
+/**
+ * Detail bike screen
+ *
+ * @param name
+ * @param modifier
+ * @param navController
+ * @param viewModel
+ */
 @SuppressLint("FlowOperatorInvokedInComposition")
 @Composable
 fun DetailBikeScreen(
@@ -55,7 +67,7 @@ fun DetailBikeScreen(
     }
 
     Card(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(state = rememberScrollState()),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Log.d("detail", detailBike.toString())
@@ -128,22 +140,24 @@ fun DetailBikeScreen(
             }
 
         }
-    }
-    Button(
-        onClick =  {
-            viewModel.viewModelScope.launch {
-                Log.d("delete", "delete bike")
-                viewModel.deleteBike(detailBike)
-                navController.popBackStack(
-                    BikeOverviewScreen.Start.name,
-                    inclusive = false,
-                )
-             }
-        },
-        modifier = modifier,
-    ) {
+        Button(
+                onClick =  {
+                    viewModel.viewModelScope.launch {
+                        Log.d("delete", "delete bike")
+                        viewModel.deleteBike(detailBike)
+                        navController.popBackStack(
+                            BikeOverviewScreen.Start.name,
+                            inclusive = false,
+                        )
+                    }
+                },
+        modifier = modifier
+            .fillMaxWidth(),
+        ) {
         Text(text = "delete", fontSize = 20.sp)
     }
+    }
+
 
 }
 

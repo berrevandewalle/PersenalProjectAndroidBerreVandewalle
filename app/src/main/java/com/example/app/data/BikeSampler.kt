@@ -4,15 +4,15 @@ package com.example.app.data
 import com.example.app.model.Bike
 
 object BikeSampler {
-    private val sampleBikes = listOf(Bike(1, "Cervelo S5", 100.0, "https://www.lease-a-bike.be/cdn-cgi/image/format=auto,quality=70,width=750/storage/uploads/cervelo-s5-black.png",
-        "The S5 has reduced drag by 65 grams of aerodynamic drag \n" +
-                "reduced and increased the surface area of the frame, while the overall \n" +
-                "weight has been brought down. The enlarged frame sections maximize the \n" +
-                "shapes allowed by the UCI. Meanwhile, the iconic \n" +
-                "v-stem has been further refined and a new fork designed to make the entire front end \n" +
-                "simplify. In addition, a groundbreaking new \n" +
-                "wheel design concept was developed to increase stability and reduce \n" +
-                "reduce drag in turbulent aerodynamic \n" +
+    private val sampleBikes = listOf(Bike(1, "Cervelo S5", 12344.0, "https://www.lease-a-bike.be/cdn-cgi/image/format=auto,quality=70,width=750/storage/uploads/cervelo-s5-black.png",
+        "The S5 has reduced drag by 65 grams of aerodynamic drag " +
+                "reduced and increased the surface area of the frame, while the overall " +
+                "weight has been brought down. The enlarged frame sections maximize the " +
+                "shapes allowed by the UCI. Meanwhile, the iconic " +
+                "v-stem has been further refined and a new fork designed to make the entire front end " +
+                "simplify. In addition, a groundbreaking new " +
+                "wheel design concept was developed to increase stability and " +
+                "reduce drag in turbulent aerodynamic " +
                 "conditions. "),
         Bike(2, "S-Works Tarmac SL8", 14000.0, "https://assets.specialized.com/i/specialized/94924-02_TARMAC-SL8-SW-ETAP-FOGTNT-GRNGSTPRL-REDGSTPRL_HERO",
             "After a decade of working in the Win Tunnel, our engineers put aero where it matters, not just where it looks good. The result? A new Nose Cone called the ‘Speed Sniffer’ helps the new Tarmac SL8 be 16.6 seconds faster over 40km than the Tarmac SL7. And yes, more aero than the Venge.\n" +
@@ -26,9 +26,7 @@ object BikeSampler {
         Bike(4, "Ridley FALCN RS", 6999.0,
             "https://images.cyclingfactory.be/craft/featureditems/1x-43a581d2360aa6e6e83fa8de9f48c31801fa9f6d2f6d846a9bc9bca7ff6f054d.png",
             "The Falcn RS is the ultimate road bike for any rider who wants to push their limits and take their performance to the next level. It is made for those who demand top quality and want a reliable and efficient speed machine to achieve their goals. With its aero and lightweight carbon frame and responsive handling, the Falcn RS is ready for all your competitive cycling goals. This versatile road bike can handle any road race, whether it's a grueling mountain stage or a classic, fast road race. It is the perfect tool for the spring classics, known for their tough and challenging courses on bad roads.\n" +
-                    "\n" +
                     "With a frame suitable for tires up to 34 mm and its responsive handling, the Falcn RS is ready for any challenge you give it.\n" +
-                    "\n" +
                     "The lightweight 830-gram frame helps you conquer the highest mountains, and the exceptional aerodynamics of the frame and fork turn every watt into pure speed when you're in the breakaway."),
         Bike(5, "Factor Ostro VAM", 8599.0,
             "https://images.ctfassets.net/uyc32o2uod42/7mLNS27c9f797nY2WfpAQn/532d97d61ba8bcac23ca1de660631315/6_pdp_hero_Ostro_chrome_ds.webp",

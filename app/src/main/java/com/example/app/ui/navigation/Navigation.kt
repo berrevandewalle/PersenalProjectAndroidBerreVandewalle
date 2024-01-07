@@ -10,6 +10,15 @@ import com.example.app.ui.bikeOverview.BikeOverview
 import com.example.app.ui.detail.DetailBikeScreen
 
 
+/**
+ * Nav component
+ *
+ * @param navController
+ * @param modifier
+ * @param fabActionVisible
+ * @param fabResetAction
+ * @receiver
+ */
 @Composable
 fun navComponent(
     navController: NavHostController,
@@ -35,8 +44,5 @@ fun navComponent(
                 DetailBikeScreen(name = name, navController= navController)
             }
         }
-/*        composable(route = ClothesOverviewScreen.Start.name) {
-            ClothesOverview(isAddingVisisble = fabActionVisible, makeInvisible = fabResetAction)
-        }*/
     }
 }

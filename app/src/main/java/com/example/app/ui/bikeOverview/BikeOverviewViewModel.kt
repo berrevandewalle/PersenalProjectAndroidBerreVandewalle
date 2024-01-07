@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.app.BikeApplication
-import com.example.app.data.BikeSampler
 import com.example.app.data.BikesRepository
 import com.example.app.model.Bike
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +24,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.text.NumberFormat
-import kotlin.math.log
 
+/**
+ * Bike overview view model
+ *
+ * @property bikesRepository
+ * @constructor Create empty Bike overview view model
+ */
 class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : ViewModel()  {
     /*
 
@@ -49,6 +53,10 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
         Log.i("vm inspection", "BikeOverviewViewModel init")
     }
 
+    /**
+     * Add bike
+     *
+     */
     fun addBike() {
         // saving the new bike (to db? to network? --> doesn't matter)
         Log.d("ViewModel", "Adding bike: ${_uiState.value.newBikeId}, ${_uiState.value.newBikeName}, ${_uiState.value.newBikePrice}, " +
@@ -78,39 +86,70 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
         }
     }
 
+    /**
+     * Formated price
+     *
+     * @return
+     */
     fun Bike.formatedPrice(): String {
         return NumberFormat.getCurrencyInstance().format(price)
     }
 
     private fun validateInput(): Boolean {
         return with(_uiState) {
-            value.newBikeId > 0 && value.newBikeName.isNotEmpty() && value.newBikePrice > 0.0
+            value.newBikeId > 0 && value.newBikeName.isNotEmpty() && value.newBikePrice!! > 0.0
         }
     }
 
+    /**
+     * Set new bike id
+     *
+     * @param newBikeId
+     */
     fun setNewBikeId(newBikeId: Int) {
         _uiState.update {
             it.copy(newBikeId = newBikeId)
         }
     }
+
+    /**
+     * Set new bike name
+     *
+     * @param newBikeName
+     */
     fun setNewBikeName(newBikeName: String) {
         _uiState.update {
             it.copy(newBikeName = newBikeName)
         }
     }
 
+    /**
+     * Set new bike price
+     *
+     * @param newBikePrice
+     */
     fun setNewBikePrice(newBikePrice: Double) {
         _uiState.update {
             it.copy(newBikePrice = newBikePrice)
         }
     }
 
+    /**
+     * Set new bike img src
+     *
+     * @param newBikeImgSrc
+     */
     fun setNewBikeImgSrc(newBikeImgSrc: String) {
         _uiState.update {
             it.copy(newBikeImgSrc = newBikeImgSrc)
         }
     }
 
+    /**
+     * Set new bike description
+     *
+     * @param newBikeDescription
+     */
     fun setNewBikeDescription(newBikeDescription: String) {
         _uiState.update {
             it.copy(newBikeDescription = newBikeDescription)
@@ -141,7 +180,12 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
         }
     }
 
-    private suspend fun saveBike(bike: Bike) {
+    /**
+     * Save bike
+     *
+     * @param bike
+     */
+    suspend fun saveBike(bike: Bike) {
         if (validateInput()) {
             Log.d("addBike", bike.name)
             withContext(Dispatchers.IO) {
@@ -152,12 +196,6 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
             Log.d("saveBike", "Validation failed.")
         }
     }
-
-/*    fun onVisibilityChanged() {
-        _uiState.update {
-            it.copy(isAddingVisible = !_uiState.value.isAddingVisible)
-        }
-    }*/
 
     // object to tell the android framework how to handle the parameter of the viewmodel
     companion object {

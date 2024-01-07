@@ -6,9 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.app.data.BikeSampler
 
-@Database(entities = [dbBike::class], version = 3, exportSchema = false)
+/**
+ * Bike db
+ *
+ * @constructor Create empty Bike db
+ */
+@Database(entities = [dbBike::class], version = 5, exportSchema = false)
 abstract class BikeDb : RoomDatabase() {
 
+    /**
+     * Bike dao
+     *
+     * @return
+     */
     abstract fun bikeDao(): BikeDao
 
     companion object {

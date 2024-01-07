@@ -4,6 +4,11 @@ import android.app.Application
 import com.example.app.data.AppContainer
 import com.example.app.data.DefaultAppContainer
 
+/**
+ * Bike application
+ *
+ * @constructor Create empty Bike application
+ */
 class BikeApplication: Application() {
 
     lateinit var container: AppContainer

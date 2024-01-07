@@ -4,8 +4,17 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.app.model.Bike
 import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.flow.Flow
 
+/**
+ * Db bike
+ *
+ * @property id
+ * @property name
+ * @property price
+ * @property imgSrc
+ * @property description
+ * @constructor Create empty Db bike
+ */
 @Entity(tableName = "bikes")
 data class dbBike(
     @PrimaryKey
@@ -22,6 +31,11 @@ data class dbBike(
 
 )
 
+/**
+ * As domain bike
+ *
+ * @return
+ */
 fun dbBike?.asDomainBike(): Bike {
     return Bike(
         id = this?.id ?: 0,
@@ -32,6 +46,11 @@ fun dbBike?.asDomainBike(): Bike {
     )
 }
 
+/**
+ * As db bike
+ *
+ * @return
+ */
 fun Bike.asDbBike(): dbBike {
     return dbBike(
         id = this.id,
@@ -42,6 +61,11 @@ fun Bike.asDbBike(): dbBike {
     )
 }
 
+/**
+ * As domain bikes
+ *
+ * @return
+ */
 fun List<dbBike>.asDomainBikes(): List<Bike> {
     var bikeList = this.map {
         Bike(it.id, it.name, it.price, it.imgSrc, it.description)

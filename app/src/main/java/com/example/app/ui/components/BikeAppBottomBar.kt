@@ -12,6 +12,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
+/**
+ * Bike bottom app bar
+ *
+ * @param goHome
+ * @receiver
+ */
 @Composable
 fun BikeBottomAppBar(goHome: () -> Unit) {
 
@@ -22,14 +28,6 @@ fun BikeBottomAppBar(goHome: () -> Unit) {
             IconButton(onClick = goHome) {
                 Icon(Icons.Filled.Home, contentDescription = "navigate to home screen")
             }
-
-
-/*            IconButton(onClick = goToDetail) {
-                Icon(
-                    Icons.Filled.ManageAccounts,
-                    contentDescription = "navigate to detail page",
-                )
-            }*/
 
         },
     )

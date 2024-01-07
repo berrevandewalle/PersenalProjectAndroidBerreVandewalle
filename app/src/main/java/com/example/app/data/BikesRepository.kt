@@ -24,24 +24,66 @@ import kotlinx.coroutines.runBlocking
 import java.net.SocketTimeoutException
 import java.util.UUID
 
+/**
+ * Bikes repository
+ *
+ * @constructor Create empty Bikes repository
+ */
 interface BikesRepository {
-    // all items from datasource
+    /**
+     * Get bikes
+     *
+     * @return
+     */// all items from datasource
     fun getBikes(): Flow<List<Bike>>
 
-    // one specific item
+    /**
+     * Get bike
+     *
+     * @param name
+     * @return
+     */// one specific item
     fun getBike(name: String): Flow<Bike?>
 
+    /**
+     * Insert bike
+     *
+     * @param bike
+     */
     suspend fun insertBike(bike: Bike)
 
+    /**
+     * Delete bike
+     *
+     * @param bike
+     */
     suspend fun deleteBike(bike: Bike)
 
+    /**
+     * Update bike
+     *
+     * @param bike
+     */
     suspend fun updateBike(bike: Bike)
 
+    /**
+     * Refresh
+     *
+     */
     suspend fun refresh()
 
     var wifiWorkInfo: Flow<WorkInfo>
 }
 
+/**
+ * Caching bikes repository
+ *
+ * @property bikeDao
+ * @property bikeApiService
+ * @constructor
+ *
+ * @param context
+ */
 class CachingBikesRepository(private val bikeDao: BikeDao, private val bikeApiService: BikeApiService, context: Context) : BikesRepository {
 
     // this repo contains logic to refresh the tasks (remote)

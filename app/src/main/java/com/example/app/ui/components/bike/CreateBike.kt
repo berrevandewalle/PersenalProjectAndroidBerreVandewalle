@@ -19,17 +19,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import com.example.app.R
-import com.example.app.ui.theme.BikeAppTheme
 
 
+/**
+ * Create bike
+ *
+ * @param bikeName
+ * @param bikePrice
+ * @param bikeImgSrc
+ * @param bikeDecription
+ * @param onBikeNameChanged
+ * @param onBikePriceChanged
+ * @param onBikeImgSrcChanged
+ * @param onBikeDescriptionChanged
+ * @param onBikeSaved
+ * @param onDismissRequest
+ * @receiver
+ * @receiver
+ * @receiver
+ * @receiver
+ * @receiver
+ * @receiver
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateBike(
     bikeName: String,
-    bikePrice: Double,
+    bikePrice: Double?,
     bikeImgSrc: String,
     bikeDecription: String,
     onBikeNameChanged: (String) -> Unit,
@@ -60,10 +78,9 @@ fun CreateBike(
                 OutlinedTextField(
                     value = bikePrice.toString(),
                     onValueChange = {
-                        // Probeer de ingevoerde waarde naar een Double om te zetten
-                        val newValue = it.toDoubleOrNull() ?: 0.0
-                        // Geef de nieuwe waarde door aan onBikePriceChanged
-                        onBikePriceChanged(newValue)
+                        if (bikePrice != null) {
+                            onBikePriceChanged(bikePrice)
+                        }
                     },
                     label = { Text("price bike") },
                 )
@@ -94,11 +111,15 @@ fun CreateBike(
         }
     }
 }
-
+/*
+/**
+ * Create bike preview
+ *
+ */
 @Preview
 @Composable
 fun CreateBikePreview() {
     BikeAppTheme {
         CreateBike("", 0.0,"", "", {}, {}, {},{},{}, { /* on dismiss */ })
     }
-}
+}/*/

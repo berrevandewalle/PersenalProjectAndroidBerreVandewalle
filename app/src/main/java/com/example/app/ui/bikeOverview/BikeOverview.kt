@@ -3,7 +3,6 @@ package com.example.app.ui.bikeOverview
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -14,19 +13,23 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.app.data.BikeSampler
-import com.example.app.model.Bike
 import com.example.app.ui.components.bike.BikeItem
 import com.example.app.ui.components.bike.CreateBike
-import com.example.app.ui.navigation.navComponent
 import kotlinx.coroutines.launch
 
 
-
+/**
+ * Bike overview
+ *
+ * @param modifier
+ * @param bikeOverviewViewModel
+ * @param isAddingVisisble
+ * @param makeInvisible
+ * @param navController
+ * @receiver
+ */
 @Composable
 fun BikeOverview(
     modifier: Modifier = Modifier,
@@ -67,8 +70,7 @@ fun BikeOverview(
                         bikeOverviewViewModel.addBike()
                         makeInvisible()
                     },
-                    onDismissRequest = { makeInvisible() },
-                )
+                ) { makeInvisible() }
             }
         }
     }
@@ -77,7 +79,14 @@ fun BikeOverview(
 }
 
 
-
+/**
+ * Bike list component
+ *
+ * @param modifier
+ * @param bikeOverviewState
+ * @param bikeListState
+ * @param navController
+ */
 @Composable
 fun BikeListComponent(
     modifier: Modifier = Modifier,

@@ -2,9 +2,7 @@ package com.example.app.data
 
 import android.content.Context
 import com.example.app.data.database.BikeDb
-import com.example.app.data.database.ClothesDb
 import com.example.app.network.BikeApiService
-import com.example.app.network.ClothesApiService
 import com.example.app.network.NetworkConnectionInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -13,11 +11,21 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
+/**
+ * App container
+ *
+ * @constructor Create empty App container
+ */
 interface AppContainer {
     val bikesRepository: BikesRepository
-    val clothesRepository: ClothesRepository
 }
 
+/**
+ * Default app container
+ *
+ * @property context
+ * @constructor Create empty Default app container
+ */
 class DefaultAppContainer(private val context: Context) : AppContainer {
 
     private val networkCheck = NetworkConnectionInterceptor(context)
@@ -51,13 +59,6 @@ class DefaultAppContainer(private val context: Context) : AppContainer {
         CachingBikesRepository(BikeDb.getDatabase(context = context).bikeDao(), retrofitService, context)
     }
 
-    private val retrofitServiceClothes: ClothesApiService by lazy {
-        retrofit.create(ClothesApiService::class.java)
-    }
-
-    override val clothesRepository: ClothesRepository by lazy {
-        CachingClothesRepository(ClothesDb.getDatabase(context = context).clothesDao(), retrofitServiceClothes, context)
-    }
 
 }
 

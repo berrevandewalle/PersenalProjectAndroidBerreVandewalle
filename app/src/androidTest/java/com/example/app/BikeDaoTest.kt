@@ -27,11 +27,11 @@ class BikeDaoTest {
     private var bike2 = Bike(2, "bike2",7000.0, "","")
 
     // unility functions
-    private suspend fun addOneTaskToDb() {
+    private suspend fun addOneBikeToDb() {
         bikeDao.insert(bike1.asDbBike())
     }
 
-    private suspend fun addTwoTasksToDb() {
+    private suspend fun addTwoBikesToDb() {
         bikeDao.insert(bike1.asDbBike())
         bikeDao.insert(bike2.asDbBike())
     }
@@ -56,16 +56,16 @@ class BikeDaoTest {
 
     @Test
     @Throws(Exception::class)
-    fun daoInert_insertTaskIntoDB() = runBlocking {
-        addOneTaskToDb()
+    fun daoInert_insertBikesIntoDB() = runBlocking {
+        addOneBikeToDb()
         val allItems = bikeDao.getAllItems().first()
         assertEquals(allItems[0].asDomainBike(), bike1)
     }
 
     @Test
     @Throws(Exception::class)
-    fun daoGetAllTasks_returnsAllTasksFromDB() = runBlocking {
-        addTwoTasksToDb()
+    fun daoGetAllBikes_returnsAllBikesFromDB() = runBlocking {
+        addTwoBikesToDb()
         val allItems = bikeDao.getAllItems().first()
         assertEquals(allItems[0].asDomainBike(), bike1)
         assertEquals(allItems[1].asDomainBike(), bike2)

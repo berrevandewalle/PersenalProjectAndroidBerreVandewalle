@@ -139,4 +139,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
 
 
+    val mockitoVersion = "5.8.0"
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0-RC2")
+
+
+
 }

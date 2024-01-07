@@ -15,6 +15,14 @@ import androidx.navigation.NavDestination
 import com.example.app.R
 import com.example.app.ui.navigation.BikeOverviewScreen
 
+/**
+ * Navigation drawer content
+ *
+ * @param selectedDestination
+ * @param onTabPressed
+ * @param modifier
+ * @receiver
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationDrawerContent(

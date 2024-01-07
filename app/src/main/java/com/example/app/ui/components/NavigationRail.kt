@@ -7,6 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import com.example.app.ui.navigation.BikeOverviewScreen
+
+/**
+ * Bike navigation rail
+ *
+ * @param selectedDestination
+ * @param onTabPressed
+ * @param modifier
+ * @receiver
+ */
 @Composable
 fun BikeNavigationRail(selectedDestination: NavDestination?, onTabPressed: (String) -> Unit, modifier: Modifier = Modifier) {
     NavigationRail(modifier = modifier) {

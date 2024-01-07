@@ -1,9 +1,7 @@
 package com.example.app.ui.components.bike
 
 
-import android.net.Uri
 import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,12 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.RadioButtonChecked
 import androidx.compose.material.icons.filled.RadioButtonUnchecked
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,29 +25,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.app.R
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.app.ui.components.BikeAppAppBar
-import com.example.app.ui.navigation.BikeOverviewScreen
-import com.example.app.ui.navigation.navComponent
 import java.text.NumberFormat
 
+/**
+ * Bike item
+ *
+ * @param name
+ * @param price
+ * @param img
+ * @param modifier
+ * @param navController
+ */
 @Composable
 fun BikeItem(
     name: String,
-    price: Double,
+    price: Double?,
     img: String,
     modifier: Modifier = Modifier,
     navController: NavHostController,
@@ -126,6 +119,14 @@ fun BikeItem(
     }
 }
 
+/**
+ * Bike item status
+ *
+ * @param done
+ * @param onClick
+ * @param modifier
+ * @receiver
+ */
 @Composable
 fun BikeItemStatus(
     done: Boolean,
@@ -147,6 +148,13 @@ fun BikeItemStatus(
     }
 }
 
+/**
+ * Bike item button
+ *
+ * @param onClick
+ * @param modifier
+ * @receiver
+ */
 @Composable
 fun BikeItemButton(
     onClick: () -> Unit,

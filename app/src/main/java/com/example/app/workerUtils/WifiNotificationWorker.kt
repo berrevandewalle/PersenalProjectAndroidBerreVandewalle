@@ -17,6 +17,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 private const val TAG = "WithWifiWorker"
+
+/**
+ * Wifi notification worker
+ *
+ * @constructor
+ *
+ * @param context
+ * @param params
+ */
 class WifiNotificationWorker(context : Context, params: WorkerParameters): CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         makeStatusNotification("starting the worker", applicationContext)
@@ -33,6 +42,12 @@ class WifiNotificationWorker(context : Context, params: WorkerParameters): Corou
 }
 
 
+/**
+ * Make status notification
+ *
+ * @param message
+ * @param context
+ */
 fun makeStatusNotification(message: String, context: Context) {
 
     // Make a channel if necessary

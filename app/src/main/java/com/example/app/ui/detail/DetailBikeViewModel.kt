@@ -18,13 +18,35 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Bike details view model
+ *
+ * @property bikesRepository
+ * @constructor Create empty Bike details view model
+ */
 class BikeDetailsViewModel(private val bikesRepository: BikesRepository): ViewModel() {
-    // Get full bus schedule from Room DB
+    /**
+     * Get bikes
+     *
+     * @return
+     */// Get full bus schedule from Room DB
     fun getBikes(): Flow<List<Bike>> = bikesRepository.getBikes()
-    // Get bus schedule based on the stop name from Room DB
+
+    /**
+     * Get bike
+     *
+     * @param name
+     * @return
+     */// Get bus schedule based on the stop name from Room DB
     fun getBike(name: String): Flow<Bike?> =
         bikesRepository.getBike(name)
 
+    /**
+     * Delete bike
+     *
+     * @param bike
+     * @return
+     */
     suspend fun deleteBike(bike: Bike?): Job =
         viewModelScope.launch {
             bike?.let {

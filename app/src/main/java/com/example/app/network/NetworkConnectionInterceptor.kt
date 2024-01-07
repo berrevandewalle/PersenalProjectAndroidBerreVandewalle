@@ -9,6 +9,12 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
+/**
+ * Network connection interceptor
+ *
+ * @property context
+ * @constructor Create empty Network connection interceptor
+ */
 class NetworkConnectionInterceptor (val context: Context) : Interceptor  {
 
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
@@ -24,6 +30,12 @@ class NetworkConnectionInterceptor (val context: Context) : Interceptor  {
 
     }
 
+    /**
+     * Is connected
+     *
+     * @param context
+     * @return
+     */
     fun isConnected(context: Context): Boolean {
         var result = false
         val connectivityManager =
