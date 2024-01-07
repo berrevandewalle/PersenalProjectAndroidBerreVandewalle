@@ -78,9 +78,8 @@ fun CreateBike(
                 OutlinedTextField(
                     value = bikePrice.toString(),
                     onValueChange = {
-                        if (bikePrice != null) {
-                            onBikePriceChanged(bikePrice)
-                        }
+                        val newValue = it.toDoubleOrNull() ?: 0.0
+                        onBikePriceChanged(newValue)
                     },
                     label = { Text("price bike") },
                 )

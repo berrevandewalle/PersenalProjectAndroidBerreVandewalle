@@ -97,7 +97,7 @@ class BikeOverviewViewModel(private val bikesRepository: BikesRepository) : View
 
     private fun validateInput(): Boolean {
         return with(_uiState) {
-            value.newBikeId > 0 && value.newBikeName.isNotEmpty() && value.newBikePrice!! > 0.0
+            value.newBikeId > 0 && value.newBikeName.isNotEmpty()
         }
     }
 
