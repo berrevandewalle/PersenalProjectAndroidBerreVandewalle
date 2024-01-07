@@ -15,7 +15,7 @@ Dit project is een fietsapp van heel wat verschillende fietsmerken.
 - Experience with Kotlin syntax.
 - How to create and run a project in Android Studio.
 
-Getting Started
+## Getting Started
 
 1. Install Android Studio, if you don't already have it.
 2. Download the sample.
